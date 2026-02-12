@@ -117,6 +117,13 @@ sudo afw disable
 sudo afw reload
 sudo afw status
 
+# Systemd service management
+sudo systemctl enable afw       # Auto-start on boot
+sudo systemctl start afw        # Start firewall
+sudo systemctl stop afw         # Stop firewall
+sudo systemctl reload afw       # Reload rules
+sudo systemctl status afw       # Check status
+
 # Backup
 sudo afw backup create
 sudo afw backup list
