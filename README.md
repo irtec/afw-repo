@@ -28,6 +28,8 @@ AFW (Advanced Firewall) is a powerful firewall management tool designed for Linu
 
 ## Installation
 
+> **⚠️ Important:** AFW will automatically detect and disable conflicting firewall services (UFW, firewalld, iptables service) during **fresh installation** to prevent conflicts and crashes.
+
 ### Debian / Ubuntu (APT)
 
 ```bash
@@ -77,7 +79,10 @@ Launches the interactive menu with 12 options — navigate with arrow keys:
 ### CLI Commands
 
 ```bash
-# Setup (first time)
+# Setup (first time) - auto-detect interface and SSH port
+sudo afw setup
+
+# Or specify manually
 sudo afw setup --interface eth0 --ssh-port 22
 
 # Port management
@@ -121,6 +126,28 @@ sudo afw backup restore /var/lib/afw/backups/state-20240101-120000.json
 sudo afw rules    # raw iptables-save output
 sudo afw version
 ```
+
+## Upgrade
+
+Upgrading AFW is seamless - your configuration and rules are preserved:
+
+```bash
+# Debian / Ubuntu
+sudo apt update && sudo apt upgrade -y
+
+# RHEL / Fedora / CentOS
+sudo dnf upgrade -y
+
+# Ubuntu PPA
+sudo apt update && sudo apt upgrade -y
+```
+
+After upgrade, reload to apply new features:
+```bash
+sudo afw reload
+```
+
+> **Note:** Conflicting firewall detection only runs on fresh install, not on upgrades. Your existing firewall state is preserved during upgrades.
 
 ## Resources
 
