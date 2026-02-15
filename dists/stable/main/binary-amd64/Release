@@ -1,0 +1,6 @@
+Archive: stable
+Component: main
+Origin: AFW Firewall
+Label: AFW
+Architecture: amd64
+Description: AFW Firewall packages for Debian/Ubuntu
