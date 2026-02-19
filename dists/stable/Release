@@ -1,0 +1,38 @@
+Origin: AFW Firewall
+Label: AFW
+Suite: stable
+Codename: stable
+Date: Thu, 19 Feb 2026 14:21:00 UTC
+Architectures: amd64 arm64 armhf
+Components: main
+Description: AFW Firewall packages for Debian/Ubuntu
+MD5Sum:
+ d5677394afa9477da6c10af14a5620b6 467 main/binary-amd64/Packages
+ 5582259bace4d5e7454b0649ccdf1c4c 362 main/binary-amd64/Packages.gz
+ 418c716eb8f07762ac2133b4d04d1dac 137 main/binary-amd64/Release
+ 582b4bffb3fa762fad4895ba6038979c 467 main/binary-arm64/Packages
+ 40e925ae0d90bd87d2040d7e5b4c7430 363 main/binary-arm64/Packages.gz
+ 316e4d4a6c428d5e38df8234590ecf32 137 main/binary-arm64/Release
+ 4d347329df60f37319e65f130ec3ba47 467 main/binary-armhf/Packages
+ b9f984828b9bbe657db16893afdf14c1 364 main/binary-armhf/Packages.gz
+ 9c36c0dfea28753852ea88500e143817 137 main/binary-armhf/Release
+SHA1:
+ 1f78b3ec706358aca4ef4367dfc5be868c3a4d2f 467 main/binary-amd64/Packages
+ 91a238e918f8ab158184d9218fd7ff90216a44a9 362 main/binary-amd64/Packages.gz
+ d65f8c9fd71480c99c5a323d149515c477e5525e 137 main/binary-amd64/Release
+ 8450d867a1724ad1acdf58e1e48ff032f88ae834 467 main/binary-arm64/Packages
+ 88131657cae864572e2e13a17fc4ff7b0d99bb41 363 main/binary-arm64/Packages.gz
+ 5795b3c1fb9b84b9c7e05c30b7425bc2a649ff5f 137 main/binary-arm64/Release
+ 9681bc3bfff4897270d7a75a00b8ef07bb9d1136 467 main/binary-armhf/Packages
+ 8847c5538cf47613f9548e464f9bde69524e9efe 364 main/binary-armhf/Packages.gz
+ 57f05ff9a2b087f9cb52250bb42c8b6d8b6198e4 137 main/binary-armhf/Release
+SHA256:
+ 5c5bb5980c53aa928d2573355dc63489bad0826d1b256a2bb2332391b97c5a75 467 main/binary-amd64/Packages
+ 01bb0d727ea7c6c706c4f98a9f56f11e2118222645a2de095d60258da3c54d7e 362 main/binary-amd64/Packages.gz
+ e9a01cca98c503cfbb7bb708ac58be9db45a574ebbf071bc7c6ef052010663ad 137 main/binary-amd64/Release
+ 0b2e97e6c53f5b452ac76f9d1452cf531b282d87810bfd375f59bd28bb253765 467 main/binary-arm64/Packages
+ 96b9fbac6407bbad357a2b59498dd3dd7b9fd293c605270780e050f137049d98 363 main/binary-arm64/Packages.gz
+ 7efae164da4d4fb22b6fcfb9a28dcbda342a770e8e49400917407b01b1dee165 137 main/binary-arm64/Release
+ b6a34111d3066b6743dbfc94d5e777cb6b325ea29e5d0b6a3b01dc47809fe60f 467 main/binary-armhf/Packages
+ 0914a4fdd667d240ca974a3d352e12c79df028e52ccd0619787cb2abdc4d5e2c 364 main/binary-armhf/Packages.gz
+ 014502240e25c0c8077f29580fe30284413631c18c9d4b82de999198b3131d46 137 main/binary-armhf/Release

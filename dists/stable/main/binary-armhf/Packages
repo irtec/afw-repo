@@ -1,0 +1,16 @@
+Package: afw
+Version: 2.0.1
+Architecture: armhf
+License: GPL
+Maintainer: iryadinata <irya31@gmail.com>
+Installed-Size: 3904
+Homepage: https://www.irya.dev/
+Priority: optional
+Section: 
+Filename: pool/main/a/afw/afw_2.0.1_armhf.deb
+Size: 1561462
+SHA256: 457ba3900aba8357d3bfe148a57b0fda481e78a5833676ed4f2c4f0ae3ddf9ac
+SHA1: db6c8f4d4ba68516632c3e92c20a69a0572918bd
+MD5sum: 2e3627d9f39b0d3db107c9ef8d5b466f
+Description: Advanced Firewall Management for Linux Servers
+
