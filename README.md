@@ -1,76 +1,84 @@
-# 🔥 AFW Firewall - Package Repository
+# 🔥 AFW Firewall v2.3.0
 
-Advanced Firewall Management & Integrated WireGuard VPN for Linux Servers
+**Advanced Firewall Management & Integrated WireGuard VPN for Linux Servers**
 
-## About AFW Firewall
+## Features
 
-AFW (Advanced Firewall) is a powerful firewall management tool designed for Linux servers. It provides both CLI and a modern interactive TUI (Terminal User Interface) for easy firewall configuration and management.
+- Port Management — Open/close TCP/UDP ports, ranges, and IP-restricted rules
+- Port Protection — Rate limiting for brute-force defense
+- IP Management — Whitelist and blacklist IP addresses
+- NAT & Port Forwarding — PREROUTING REDIRECT and POSTROUTING masquerade
+- IGMP/Multicast — Multicast traffic control
+- WireGuard VPN — Integrated road-warrior VPN with QR export & AES-GCM encrypted keys
+- IPv6 Filtering — Auto-detects host IPv6 and filters it with ip6tables
+- Factory Reset — Wipe rules, state, and WireGuard configuration (afw reset)
+- Docker Protection — Rate-limit container ports & auto-reload on Docker events
+- External Rules Preservation — Keep Docker/K8s/libvirt rules intact
+- Kernel Hardening — sysctl security parameters
+- Automatic Snapshots — State is backed up before each change, pruned to a retention limit
 
-### Key Features
+## Built-in Security
 
-- **Port Management** — Open/close TCP/UDP ports and port ranges
-- **Port Protection** — Rate limiting for brute-force defense
-- **IP Management** — Whitelist and blacklist IP addresses
-- **NAT & Port Forwarding** — PREROUTING REDIRECT and POSTROUTING masquerade
-- **IGMP/Multicast** — Multicast traffic control
-- **WireGuard VPN** — Integrated road-warrior VPN server with QR export & AES-GCM encrypted keys
-- **Factory Reset** — Wipe rules, state, and WireGuard server (`afw reset`)
-- **Docker Protection** — Rate-limit container ports & auto-reload on Docker daemon events
-- **External Rules Preservation** — Intelligently preserve Docker, K8s, and libvirt rules
-- **Kernel Hardening** — sysctl security parameters
-- **Backup/Restore** — State snapshots for easy recovery
-
-### Built-in Security
-
-- WireGuard AES-GCM Key Encryption at rest (`0600` root-only key file)
+- WireGuard AES-GCM Key Encryption at rest (0600 root-only key file)
+- IPv6 filtering with a full ip6tables ruleset (automatic on IPv6 hosts)
 - SYN flood protection with rate limiting
 - Ping of death protection (ICMP rate limiting)
 - Port scan detection (RST packet analysis)
-- IP spoofing defense (bogon/RFC1918 blocking)
+- IP spoofing defense (bogon/reserved-range blocking)
 - Windows port blocking (135,137,138,139,445)
 - SSH brute-force protection
 - Input sanitization (no shell injection)
 
 ## Installation
 
-> **✨ Zero-Config Setup:** AFW automatically detects your network interface and SSH port during installation. Conflicting firewalls (UFW, firewalld) are disabled on fresh install only.
+**✨ Zero-Config Setup:** AFW automatically detects your network interface and SSH port during installation. Conflicting firewalls (UFW, firewalld) are disabled on fresh install only.
 
 ### Debian / Ubuntu (APT)
 
 ```bash
+
 curl -fsSL https://irtec.github.io/afw-repo/pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/afw.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/afw.gpg] https://irtec.github.io/afw-repo stable main" | sudo tee /etc/apt/sources.list.d/afw.list
 sudo apt update && sudo apt install afw
 ```
 
-Or one-liner:
-```bash
-curl -fsSL https://irtec.github.io/afw-repo/setup-apt.sh | sudo bash
-```
-
 ### RHEL / Fedora / CentOS (YUM/DNF)
 
 ```bash
+
 sudo curl -fsSL https://irtec.github.io/afw-repo/afw.repo -o /etc/yum.repos.d/afw.repo
 sudo rpm --import https://irtec.github.io/afw-repo/pubkey.asc
 sudo dnf install afw
 ```
 
-Or one-liner:
-```bash
-curl -fsSL https://irtec.github.io/afw-repo/setup-yum.sh | sudo bash
-```
-
 ### Ubuntu PPA
 
 ```bash
+
 sudo add-apt-repository ppa:irya31/afw
 sudo apt update && sudo apt install afw
 ```
 
-## Usage
+*After installation, your firewall is automatically configured and active!*
 
-> **Note:** After installation, AFW is already configured and running! No manual setup needed.
+## Quick Start
+
+After installation, AFW is already configured and running! No manual setup needed.
+
+## IPv6 Filtering
+
+IPv6 is filtered by default whenever the host actually uses it, so it can never become a bypass around your IPv4 rules.
+
+- **auto** (default) — filter IPv6 only if the host has a global IPv6 address
+- **on** — always filter IPv6
+- **off** — IPv4 only
+
+```bash
+
+sudo afw config                        # show current mode and the decision
+sudo afw config set ipv6_mode auto     # auto | on | off
+sudo afw reload                        # apply
+```
 
 ### Interactive TUI
 
@@ -80,25 +88,32 @@ sudo afw
 
 Launches the modern interactive TUI with master-detail layout, telemetry header, rules overview, and category panels.
 
-### CLI Commands
+### Manual Reconfiguration (Optional)
 
 ```bash
-# Manual Reconfiguration (Optional) - if you need to change interface/SSH port
+
+# Only needed on a fresh, unconfigured install — a configured
+# install is preserved and  is a safe no-op.
 sudo afw setup --interface eth0 --ssh-port 22
+```
+
+### CLI Examples
+
+```bash
 
 # Port management
-sudo afw port add tcp 80
-sudo afw port add udp 53
-sudo afw port add tcp 3000-4000         # range
-sudo afw port add tcp 8080 -s 10.0.0.5  # IP-restricted
-sudo afw port remove tcp 80
+sudo afw port tcp add 80
+sudo afw port udp add 53
+sudo afw port tcp range 3000 4000      # range
+sudo afw port tcp add 8080 -s 10.0.0.5  # IP-restricted
+sudo afw port tcp remove 80
 sudo afw port list
 
 # Port protection (rate limiting)
 sudo afw protect add 22 --rate 10 --per 60
 sudo afw protect remove 22
 
-# WireGuard VPN Server (Road-Warrior)
+# WireGuard VPN Server
 sudo afw wg install                      # Install wireguard-tools
 sudo afw wg server up                    # Start WireGuard server
 sudo afw wg peer add phone               # Add client device
@@ -109,9 +124,7 @@ sudo afw wg uninstall                    # Teardown server & remove tools
 
 # IP management
 sudo afw whitelist add 10.0.0.1
-sudo afw whitelist remove 10.0.0.1
 sudo afw blacklist add 1.2.3.4
-sudo afw blacklist remove 1.2.3.4
 
 # NAT / Masquerade & IGMP
 sudo afw nat enable
@@ -121,7 +134,6 @@ sudo afw igmp disable
 
 # Port forwarding
 sudo afw forward add eth0 8080 80
-sudo afw forward remove eth0 8080 80
 
 # Firewall control
 sudo afw enable
@@ -129,47 +141,46 @@ sudo afw disable
 sudo afw reload
 sudo afw status
 
-# Systemd service management
+# Settings (IPv6 filtering mode)
+sudo afw config
+sudo afw config set ipv6_mode auto
+
+# Factory reset
+sudo afw reset                           # Wipe all rules, state & WireGuard
+```
+
+## Systemd Service
+
+```bash
+
 sudo systemctl enable afw       # Auto-start on boot
 sudo systemctl start afw        # Start firewall
 sudo systemctl stop afw         # Stop firewall
 sudo systemctl reload afw       # Reload rules
 sudo systemctl status afw       # Check status
-
-# Backup & Factory Reset
-sudo afw backup create
-sudo afw backup list
-sudo afw backup restore /etc/afw/snapshots/state-20240101-120000.json
-sudo afw reset                           # Wipe all rules, state & WireGuard
-
-# Info
-sudo afw rules show             # Detailed rules view
-sudo afw version
 ```
 
 ## Upgrade
 
-Upgrading AFW is seamless - your configuration and rules are preserved:
-
 ```bash
-# Debian / Ubuntu
+
+# APT (Debian/Ubuntu)
 sudo apt update && sudo apt upgrade -y
 
-# RHEL / Fedora / CentOS
+# DNF (RHEL/Fedora/CentOS)
 sudo dnf upgrade -y
 ```
 
-After upgrade, reload to apply new features:
-```bash
-sudo afw reload
-```
+*Config and rules are preserved. Reload after upgrade: `sudo afw reload`*
 
 ## Resources
 
-- [Package Repository](https://irtec.github.io/afw-repo/)
-- [GPG Public Key](https://irtec.github.io/afw-repo/pubkey.asc)
+- [GPG Public Key](pubkey.asc)
+- [GitHub Repository](https://github.com/irtec/afw-firewall)
 - [Ubuntu PPA](https://launchpad.net/~irya31/+archive/ubuntu/afw)
 
 ## License
 
-GPL © [irya](https://www.irya.dev)
+**GNU General Public License v3.0 or later** (GPL-3.0-or-later) — Copyright © 2024–2026 [IRTech](https://www.irya.dev).
+
+AFW is free software: you may use, study, modify, and redistribute it under the terms of the GPL. Any distributed derivative must remain open under the same license. See [LICENSE](https://github.com/irtec/afw-firewall/blob/main/LICENSE) for the full text.
