@@ -1,0 +1,45 @@
+name: Sync README from Website
+
+# Keeps afw-repo's `main` README.md in sync with the published website
+# (gh-pages/index.html). The website is the single source of truth, generated
+# by afw-firewall's repo.yml. This workflow converts it to Markdown and commits
+# it to `main`, so docs never drift between the two branches again.
+on:
+  push:
+    branches: [gh-pages]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages (source)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+
+      - name: Checkout main (target)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+
+      - name: Convert index.html -> README.md
+        run: python3 site/.github/scripts/html2md.py site/index.html main/README.md
+
+      - name: Commit and push README.md
+        working-directory: main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet README.md; then
+            echo "README.md already up to date"
+            exit 0
+          fi
+          git add README.md
+          git commit -m "docs: sync README.md from website (gh-pages)"
+          git push

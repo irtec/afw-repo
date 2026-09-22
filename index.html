@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AFW Firewall - Package Repository</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #1f2328;
+  }
+  pre {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.92em;
+  }
+  pre code { background: none; padding: 0; }
+  h2 { margin-top: 30px; border-bottom: 2px solid #333; padding-bottom: 5px; }
+  h3 { margin-top: 24px; }
+  ul { list-style: none; padding-left: 0; }
+  ul.checklist li:before { content: "✓ "; color: #28a745; font-weight: bold; }
+  ul.checklist li { margin-bottom: 4px; }
+  .badges { margin: 10px 0 20px; }
+  .badges img { margin-right: 8px; vertical-align: middle; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+    font-size: 0.95em;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th { background: #f5f5f5; }
+  .yes { color: #28a745; font-weight: bold; }
+  .no { color: #999; }
+  .note {
+    background: #eef6ff;
+    border-left: 4px solid #2684ff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+  }
+  .tree { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+</style>
+</head>
+<body>
+
+<h1>🔥 AFW Firewall v2.3.1</h1>
+<div class="badges">
+  <img src="https://github.com/irtec/afw-firewall/actions/workflows/ci.yml/badge.svg" alt="CI status">
+  <img src="https://github.com/irtec/afw-firewall/actions/workflows/release.yml/badge.svg" alt="Release status">
+</div>
+<p><strong>Advanced Firewall Management &amp; Integrated WireGuard VPN for Linux Servers</strong></p>
+
+<h2>Features</h2>
+<table>
+  <thead>
+    <tr><th>Feature</th><th>CLI</th><th>TUI</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>TCP / UDP Ports</td><td class="yes">✅</td><td class="yes">✅</td><td>Open/close ports, plus ranges and IP-restricted rules</td></tr>
+    <tr><td>Port Protection</td><td class="yes">✅</td><td class="yes">✅</td><td>Rate limiting (brute-force defense)</td></tr>
+    <tr><td>IP Whitelist</td><td class="yes">✅</td><td class="yes">✅</td><td>Allow all traffic from IP</td></tr>
+    <tr><td>IP Blacklist</td><td class="yes">✅</td><td class="yes">✅</td><td>Block all traffic from IP</td></tr>
+    <tr><td>Port Forward</td><td class="yes">✅</td><td class="yes">✅</td><td>PREROUTING REDIRECT</td></tr>
+    <tr><td>Masquerade/NAT</td><td class="yes">✅</td><td class="yes">✅</td><td>POSTROUTING NAT</td></tr>
+    <tr><td>IGMP/Multicast</td><td class="yes">✅</td><td class="yes">✅</td><td>Multicast traffic control</td></tr>
+    <tr><td><strong>WireGuard VPN</strong></td><td class="yes">✅</td><td class="yes">✅</td><td><strong>Road-warrior VPN with QR export &amp; AES-GCM encrypted keys</strong></td></tr>
+    <tr><td><strong>IPv6 Filtering</strong></td><td class="yes">✅</td><td class="yes">✅</td><td><strong>Auto-detects host IPv6 and filters it with ip6tables</strong></td></tr>
+    <tr><td><strong>Factory Reset</strong></td><td class="yes">✅</td><td class="yes">✅</td><td><strong>Wipe all rules, state, and WireGuard server (<code>afw reset</code>)</strong></td></tr>
+    <tr><td><strong>External Rules Preservation</strong></td><td class="yes">✅</td><td class="yes">✅</td><td><strong>Preserve Docker/K8s/libvirt rules</strong></td></tr>
+    <tr><td><strong>Docker Protection</strong></td><td class="yes">✅</td><td class="yes">✅</td><td><strong>Rate-limit container ports &amp; auto-reload on Docker events</strong></td></tr>
+    <tr><td>Kernel Hardening</td><td class="yes">✅</td><td class="no">—</td><td>sysctl security params</td></tr>
+    <tr><td>Firewall Backend</td><td class="yes">✅</td><td class="yes">✅</td><td>iptables full (IPv4 + IPv6). nftables is detected but not implemented — selecting it returns a clear error</td></tr>
+  </tbody>
+</table>
+
+<h2>Built-in Security</h2>
+<ul class="checklist">
+  <li><strong>WireGuard AES-GCM Key Encryption</strong> — private keys encrypted at rest (<code>0600</code> key file)</li>
+  <li><strong>IPv6 filtering</strong> — full ip6tables ruleset, enabled automatically on hosts that use IPv6</li>
+  <li><strong>SYN flood protection</strong> — rate limited with logging</li>
+  <li><strong>Ping of death protection</strong> — ICMP rate limiting</li>
+  <li><strong>Port scan detection</strong> — RST packet analysis</li>
+  <li><strong>IP spoofing defense</strong> — bogon/reserved-range blocking on WAN</li>
+  <li><strong>Windows port blocking</strong> — 135,137,138,139,445 in FORWARD</li>
+  <li><strong>SSH brute-force</strong> — <code>recent</code> module rate limiting</li>
+  <li><strong>Input sanitization</strong> — all user input cleaned (no shell injection)</li>
+</ul>
+
+<h2>🔐 Integrated WireGuard VPN</h2>
+<p>AFW includes full road-warrior WireGuard VPN management natively built-in:</p>
+<ul class="checklist">
+  <li>📱 <strong>QR Code Export</strong>: Easily connect mobile devices by scanning terminal QR codes.</li>
+  <li>🔑 <strong>Encrypted at Rest</strong>: Server and client private keys are encrypted with AES-GCM in <code>/etc/afw/state.json</code>.</li>
+  <li>🌐 <strong>Auto Firewall Integration</strong>: Automatically opens UDP listen ports, manages masquerading, and mirrors access rules to <code>wg0</code>.</li>
+  <li>⚡ <strong>Optimized MTU (1380)</strong>: Prevents MTU issues over NATs and mobile carriers.</li>
+</ul>
+
+<h2>🌐 IPv6 Filtering</h2>
+<p>IPv6 is filtered by default whenever the host actually uses it, so it can never become a bypass around your IPv4 rules.</p>
+<ul class="checklist">
+  <li><strong>auto</strong> (default) — AFW checks whether IPv6 is disabled at the kernel and whether any interface holds a global IPv6 address. If yes, the dual-stack engine (<code>iptables</code> + <code>ip6tables</code>) is used; if not, IPv4 alone.</li>
+  <li><strong>on</strong> — force IPv6 filtering on.</li>
+  <li><strong>off</strong> — force IPv6 filtering off (IPv4 only).</li>
+</ul>
+<pre><code>sudo afw config                        # show current mode and the decision
+sudo afw config set ipv6_mode auto     # auto | on | off
+sudo afw reload                        # apply</code></pre>
+<div class="note">If IPv6 filtering is requested but <code>ip6tables</code> is not installed, AFW prints a warning rather than silently leaving IPv6 unfiltered.</div>
+
+<h2>🐳 Docker &amp; Kubernetes Compatible</h2>
+<p>AFW intelligently preserves external firewall rules!</p>
+<p>When you run <code>afw reload</code>, AFW will:</p>
+<ul class="checklist">
+  <li>Preserve Docker container networking rules</li>
+  <li>Keep Kubernetes pod/service rules intact</li>
+  <li>Maintain libvirt/KVM virtual machine networking</li>
+  <li>Auto-reload rules when Docker daemon restarts (<code>docker.service</code> hook)</li>
+</ul>
+<p><strong>How it works:</strong></p>
+<ul class="checklist">
+  <li>AFW uses <strong>selective flush</strong> — only removes its own chains</li>
+  <li>External rules (Docker, K8s, libvirt) are never removed by AFW's flush, so they survive every reload</li>
+  <li>Container ports are rate-limited directly inside the <code>DOCKER-USER</code> chain</li>
+</ul>
+
+<h2>Installation</h2>
+<div class="note"><strong>✨ Zero-Config Setup:</strong> AFW automatically detects your network interface and SSH port during installation. Conflicting firewalls (UFW, firewalld) are disabled on fresh install only.</div>
+
+<h3>Debian / Ubuntu (APT)</h3>
+<pre><code>curl -fsSL https://irtec.github.io/afw-repo/pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/afw.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/afw.gpg] https://irtec.github.io/afw-repo stable main" | sudo tee /etc/apt/sources.list.d/afw.list
+sudo apt update
+sudo apt install afw</code></pre>
+<p>Or one-liner:</p>
+<pre><code>curl -fsSL https://irtec.github.io/afw-repo/setup-apt.sh | sudo bash</code></pre>
+
+<h3>Ubuntu PPA (alternative)</h3>
+<pre><code>sudo add-apt-repository ppa:irya31/afw
+sudo apt update
+sudo apt install afw</code></pre>
+
+<h3>RHEL / Fedora / CentOS (YUM/DNF)</h3>
+<pre><code>sudo curl -fsSL https://irtec.github.io/afw-repo/afw.repo -o /etc/yum.repos.d/afw.repo
+sudo rpm --import https://irtec.github.io/afw-repo/pubkey.asc
+sudo dnf install afw    # or: sudo yum install afw</code></pre>
+<p>Or one-liner:</p>
+<pre><code>curl -fsSL https://irtec.github.io/afw-repo/setup-yum.sh | sudo bash</code></pre>
+
+<h3>Binary (any Linux)</h3>
+<pre><code>curl -sL https://github.com/irtec/afw-firewall/releases/latest/download/afw_2.3.0_linux_amd64.tar.gz | tar xz
+sudo mv afw /usr/sbin/
+sudo afw setup --interface eth0 --ssh-port 22</code></pre>
+
+<h3>From Source</h3>
+<pre><code>git clone https://github.com/irtec/afw-firewall.git
+cd afw-firewall
+go build -o afw .
+sudo mv afw /usr/sbin/</code></pre>
+
+<p><em>After installation, your firewall is automatically configured and active!</em></p>
+
+<h2>Upgrade</h2>
+<p>Upgrading AFW is seamless — your configuration and rules are preserved:</p>
+<pre><code># Debian / Ubuntu
+sudo apt update && sudo apt upgrade -y
+
+# RHEL / Fedora / CentOS
+sudo dnf upgrade -y</code></pre>
+<p><em>After upgrade, reload to apply new features:</em> <code>sudo afw reload</code></p>
+
+<h2>Usage</h2>
+<div class="note">After installation, AFW is already configured and running! No manual setup needed.</div>
+
+<h3>Interactive TUI</h3>
+<pre><code>sudo afw</code></pre>
+<p>Launches the interactive TUI with master-detail layout, telemetry header, rules overview, and category panels (TCP/UDP, Protect, Ranges, Whitelist, Blacklist, NAT, IGMP, WireGuard VPN).</p>
+
+<h3>Manual Reconfiguration (Optional)</h3>
+<pre><code># Only needed on a fresh, unconfigured install — a configured
+# install is preserved and  is a safe no-op.
+sudo afw setup --interface eth0 --ssh-port 22</code></pre>
+
+<h3>CLI Commands</h3>
+<pre><code># Port management
+sudo afw port tcp add 80
+sudo afw port udp add 53
+sudo afw port tcp add 8080 -s 10.0.0.5   # IP-restricted
+sudo afw port tcp range 3000 4000        # range
+sudo afw port tcp remove 80
+sudo afw port list
+
+# Port protection (rate limiting)
+sudo afw protect add 22 --rate 10 --per 60
+sudo afw protect remove 22
+
+# WireGuard VPN Server (Road-Warrior)
+sudo afw wg install                      # Install wireguard-tools
+sudo afw wg server up                    # Start WireGuard server
+sudo afw wg peer add phone               # Add client device
+sudo afw wg client export phone --qr     # Export config as QR code
+sudo afw wg server show                  # Show live status &amp; peers
+sudo afw wg server down                  # Stop server
+sudo afw wg uninstall                    # Teardown server &amp; remove tools
+
+# IP management
+sudo afw whitelist add 10.0.0.1
+sudo afw whitelist remove 10.0.0.1
+sudo afw blacklist add 1.2.3.4
+sudo afw blacklist remove 1.2.3.4
+
+# NAT / Masquerade &amp; IGMP
+sudo afw nat enable
+sudo afw nat disable
+sudo afw igmp enable 239.255.255.250 1900
+sudo afw igmp disable
+
+# Port forwarding
+sudo afw forward add eth0 8080 80
+sudo afw forward remove eth0 8080 80
+
+# Firewall control
+sudo afw enable
+sudo afw disable
+sudo afw reload
+sudo afw status
+
+# Settings (IPv6 filtering mode)
+sudo afw config
+sudo afw config set ipv6_mode auto
+
+# Factory reset
+sudo afw reset                           # Wipe all rules, state &amp; WireGuard
+
+# Info
+sudo afw version</code></pre>
+
+<h2>Systemd Service</h2>
+<pre><code>sudo systemctl enable afw       # Auto-start on boot
+sudo systemctl start afw        # Start firewall
+sudo systemctl stop afw         # Stop firewall
+sudo systemctl reload afw       # Reload rules
+sudo systemctl status afw       # Check status</code></pre>
+
+<h2>State File</h2>
+<p>Rules and WireGuard server state are stored as JSON at <code>/etc/afw/state.json</code>:</p>
+<pre><code>{
+  "version": "2.3.0",
+  "active": true,
+  "interface": "eth0",
+  "ssh_port": 22,
+  "masquerade": false,
+  "rules": [
+    {
+      "id": "tcp-80",
+      "type": "tcp",
+      "action": "ACCEPT",
+      "protocol": "tcp",
+      "port": 80,
+      "enabled": true
+    }
+  ]
+}</code></pre>
+<p>Behavioural settings live separately in <code>/etc/afw/config.json</code>:</p>
+<pre><code>{
+  "backend": "iptables",
+  "preserve_external_rules": true,
+  "log_level": "info",
+  "auto_backup": true,
+  "max_backups": 10,
+  "ipv6_mode": "auto"
+}</code></pre>
+
+<h2>Paths</h2>
+<table>
+  <thead>
+    <tr><th>Path</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>/etc/afw/config.json</code></td><td>Behavioural settings (IPv6 mode, backups, log level)</td></tr>
+    <tr><td><code>/etc/afw/state.json</code></td><td>Firewall state (rules &amp; WireGuard VPN)</td></tr>
+    <tr><td><code>/etc/afw/wg.key</code></td><td>AES-GCM root encryption key (<code>0600</code>)</td></tr>
+    <tr><td><code>/etc/afw/snapshots/</code></td><td>State backups</td></tr>
+    <tr><td><code>/usr/sbin/afw</code></td><td>Binary</td></tr>
+  </tbody>
+</table>
+
+<h2>Resources</h2>
+<ul class="checklist">
+  <li><a href="https://irtec.github.io/afw-repo/pubkey.asc">GPG Public Key</a></li>
+  <li><a href="https://irtec.github.io/afw-repo/">Package Repository</a></li>
+  <li><a href="https://launchpad.net/~irya31/+archive/ubuntu/afw">Ubuntu PPA</a></li>
+</ul>
+
+<h2>License</h2>
+<p><strong>GNU General Public License v3.0 or later</strong> (GPL-3.0-or-later) &mdash; Copyright &copy; 2024&ndash;2026 <a href="https://www.irya.dev">IRTech</a>.</p>
+</body>
+</html>

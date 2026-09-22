@@ -1,0 +1,1 @@
+deb [arch=amd64 signed-by=/usr/share/keyrings/afw.gpg] https://irtec.github.io/afw-repo stable main

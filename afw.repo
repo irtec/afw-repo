@@ -1,0 +1,6 @@
+[afw]
+name=AFW Firewall Repository
+baseurl=https://irtec.github.io/afw-repo/rpm
+enabled=1
+gpgcheck=1
+gpgkey=https://irtec.github.io/afw-repo/pubkey.asc

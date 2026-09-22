@@ -1,0 +1,57 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: AFW Firewall
+Label: AFW
+Suite: stable
+Codename: stable
+Date: Tue, 22 Sep 2026 16:29:50 UTC
+Architectures: amd64 arm64 armhf
+Components: main
+Description: AFW Firewall packages for Debian/Ubuntu
+MD5Sum:
+ 409770f2a329443c5df44ff56e9bc02b 480 main/binary-amd64/Packages
+ de0e645811e04710c250756277bf0449 365 main/binary-amd64/Packages.gz
+ 418c716eb8f07762ac2133b4d04d1dac 137 main/binary-amd64/Release
+ 7c01966e70d8b9cf3c176c3eeb417818 480 main/binary-arm64/Packages
+ 42df00c5f1c8241bcb6ca9ec4fe9ceab 368 main/binary-arm64/Packages.gz
+ 316e4d4a6c428d5e38df8234590ecf32 137 main/binary-arm64/Release
+ 4e6f80f594f984430a8d591658c42ac6 480 main/binary-armhf/Packages
+ 72980df6f4a0415195bb33a440c3bb2e 368 main/binary-armhf/Packages.gz
+ 9c36c0dfea28753852ea88500e143817 137 main/binary-armhf/Release
+SHA1:
+ a0155182539244bab21b9dfa543a7ceb82e3a7fa 480 main/binary-amd64/Packages
+ 32986983bf2a523cfd11a42833017e97b619cfcb 365 main/binary-amd64/Packages.gz
+ d65f8c9fd71480c99c5a323d149515c477e5525e 137 main/binary-amd64/Release
+ 52dad8ad01f3faa630763b6ab35ec3a7c95e1922 480 main/binary-arm64/Packages
+ 4e854386a9873ceb4b3ad51bf2a410c55fefc622 368 main/binary-arm64/Packages.gz
+ 5795b3c1fb9b84b9c7e05c30b7425bc2a649ff5f 137 main/binary-arm64/Release
+ 499c4413d2ef567f23e91f0912a09db5811f5cf4 480 main/binary-armhf/Packages
+ 084389e42fb9dc815bd50b999ee044b01ab102e3 368 main/binary-armhf/Packages.gz
+ 57f05ff9a2b087f9cb52250bb42c8b6d8b6198e4 137 main/binary-armhf/Release
+SHA256:
+ dc827eacae341b428d1db9063ded3235288dfec25d3f2e2db15763c58145c8e2 480 main/binary-amd64/Packages
+ 365cb2adc83c9616cbf5ba9bab0c03e42c8ffbe06ba1c47c9c472bd3d274820c 365 main/binary-amd64/Packages.gz
+ e9a01cca98c503cfbb7bb708ac58be9db45a574ebbf071bc7c6ef052010663ad 137 main/binary-amd64/Release
+ bdb9b7dfbca0bc620806acb9c0659e8040fefb0ac7df6b619d9adf3d12ceccfe 480 main/binary-arm64/Packages
+ c9edd01ec59a9060a53d96782b6d57341c57bb2bdd535736875fae069e4b2308 368 main/binary-arm64/Packages.gz
+ 7efae164da4d4fb22b6fcfb9a28dcbda342a770e8e49400917407b01b1dee165 137 main/binary-arm64/Release
+ 13d88135ab22196bef74475816588a04f019be80ca71dc4edf46cef64768b133 480 main/binary-armhf/Packages
+ be448dcc77c64eed24ebfc2b84bcf0aba7f3bfad555031e8429db2f530fe03fe 368 main/binary-armhf/Packages.gz
+ 014502240e25c0c8077f29580fe30284413631c18c9d4b82de999198b3131d46 137 main/binary-armhf/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEExSRSshtBXRObv6K+CzWTfBmPpeUFAmqyrP4ACgkQCzWTfBmP
+peXZuhAAr13kpWLBLynXf+Ya2fNcks5IjCgvtFad9HzUWqBtCp4587cMlt7/jSKj
+KmaBKpyZ+4jFuLQTBG031eoCOt1iO/M9nYBj3lLphA/qzNJQPi5vk72v2A1mQ33/
+QEDClaPJxhxonb9Pi0+vBM7fUB0BtomsDm+Ljc3lw3r5ziz7epiXMlmYijAvsCb0
+EMbO4Tk5acUDTbKCk+vhKMy8PZ2nvMuxNN9ayt5VYKVU8zPNdzJRz7CO6k/3XKmR
+V6+wOJLAmXlwhUrsHi4+w2OZm/Wq6BPFnjLDevn1Hq6Nyz7OWVhgiPtlkesKByd7
+RjfCdcoirBAqKovcFR1PIQ7vFe7rnKSuI1vthI0mV/6DsC+kpQ/9oZlVREisskWC
+RgcfSK2dnwdJtczvHx12nWAZs73XFRcae3iolYXnVFjhYjLb14NoeOCOklZ+KzHh
+k4dLc9cQjL3UJO3Y0+gi/e+GsHcVAK7RscY1wrPk8F8YR7C8LF2zlM1xy0IM7Tpo
+u9IYw26N1YbvXxro7g0DpFQukirVX2h3DAK7WMjQXb3raFgel6zPXNkbDZxNfS8E
+tty0Y1oG2xVokQrN6TiWZoCZz5BH+CFOICmqex98PABXIH3C3TGs16Lir3HJSveX
+SdPgdo+4f2c/vV9L/ZBn5HuOLasv2q6sFBaCZIalOKRJnqohkKo=
+=VUVj
+-----END PGP SIGNATURE-----

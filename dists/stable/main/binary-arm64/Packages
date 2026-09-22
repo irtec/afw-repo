@@ -1,0 +1,15 @@
+Package: afw
+Version: 2.3.1
+Architecture: arm64
+Maintainer: IRTech <irtec@users.noreply.github.com>
+Installed-Size: 4673
+Homepage: https://github.com/irtec/afw-firewall
+Priority: optional
+Section: 
+Filename: pool/main/a/afw/afw_2.3.1_arm64.deb
+Size: 1803034
+SHA256: 2d2746d0d850037e33dca4a917795f5b6b68224b01b3b7d4a4e8a6d049596c6e
+SHA1: 9d42ef8a861711294ce83611972eb06198a34408
+MD5sum: 3599858b7bff855b2788a1c3946b595e
+Description: Advanced Firewall Management for Linux Servers
+
