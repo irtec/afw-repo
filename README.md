@@ -175,12 +175,10 @@ sudo dnf upgrade -y
 
 ## Resources
 
-- [GPG Public Key](pubkey.asc)
-- [GitHub Repository](https://github.com/irtec/afw-firewall)
+- [GPG Public Key](https://irtec.github.io/afw-repo/pubkey.asc)
+- [Package Repository](https://irtec.github.io/afw-repo/)
 - [Ubuntu PPA](https://launchpad.net/~irya31/+archive/ubuntu/afw)
 
 ## License
 
 **GNU General Public License v3.0 or later** (GPL-3.0-or-later) — Copyright © 2024–2026 [IRTech](https://www.irya.dev).
-
-AFW is free software: you may use, study, modify, and redistribute it under the terms of the GPL. Any distributed derivative must remain open under the same license. See [LICENSE](https://github.com/irtec/afw-firewall/blob/main/LICENSE) for the full text.
